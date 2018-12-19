@@ -2,11 +2,13 @@ syntax enable
 
 set encoding=utf8
 
-set tabpagemax=40
+"Max tabs for some serious editing
+set tabpagemax=20
 
-"For colorscheme problems
+"For colorscheme problems - set initial
 colorscheme default
 
+"Disable .swp, use version control systems
 set noswapfile
 
 "1 tab == 2 spaces
@@ -25,11 +27,13 @@ set showmatch
 "Graphical autocomplete
 set wildmenu
 
+"Statusline always on
 set laststatus=2
 
 "Set support for 256 colours in vim
 set t_Co=256
-"Indent guides
+
+"Indent guides with fixes to gruvbox_light
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=222
@@ -61,9 +65,11 @@ set scrolloff=5
 nnoremap ; :
 
 "netrw config
-" let g:netrw_list_hide = '.*.so,*.swp,*.zip,^\.git$,^\.\.=/\=$'
+let g:netrw_list_hide = '.*.so,*.swp,*.zip,^\.git$,^\.\.=/\=$'
 let g:netrw_banner = 0
 
+"Start netrw explorer instead of welcome screen
+"or open the given file
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * if argc()==0 | Explore! | endif
@@ -74,4 +80,3 @@ set cursorline
 hi clear CursorLine
 hi CursorLineNr ctermbg=grey
 hi CursorLine cterm=NONE
-
