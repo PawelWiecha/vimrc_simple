@@ -30,8 +30,10 @@ set wildmenu
 "Statusline always on
 set laststatus=2
 
-"Set support for 256 colours in vim
-set t_Co=256
+"Set support for 256 colours in vim for gnome term
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
 
 "Indent guides with fixes to gruvbox_light
 let g:indent_guides_auto_colors = 0
@@ -79,4 +81,13 @@ augroup END
 set cursorline
 hi clear CursorLine
 hi CursorLineNr ctermbg=grey
-hi CursorLine cterm=NONE
+
+"Matching parenthesis in standing out color
+hi MatchParen cterm=bold ctermbg=grey ctermfg=none
+
+"Python
+"au FileType python set omnifunc=pythoncomplete#Complete
+au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+au FileType python set foldmethod=indent foldlevel=99
+
