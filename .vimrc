@@ -1,4 +1,19 @@
-syntax enable
+"vim-plug plugins manager
+"automatically update vim-plug
+"
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'nvie/vim-flake8'
+Plug 'nachumk/systemverilog.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+
+call plug#end()
 
 set encoding=utf8
 
@@ -90,3 +105,6 @@ au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent cinword
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au FileType python set foldmethod=indent foldlevel=99
 
+"Flake8
+let g:flake8_cmd="/home/pwiecha/.local/bin/flake8"
+autocmd BufWritePost *.py call flake8#Flake8()
