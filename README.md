@@ -1,9 +1,12 @@
-In the era of IDE-VIM and 50+ plugins madness:  
-## minimal vim config used for working with different remotes  
-The intention was to provide a starting point for config  
-The dir structure works with Vim versions < 8  
-It works even with 16/256 TColors  
-The only plugins used are verilog/systemverilog syntax and indent guides  
-Clone the repo and link your .vimrc to .vimrc provided here  
+## Simple vim config for Python / Verilog developement
+The intention was to provide a starting point for config
+Plugins are managed using vim-plug  
+Works with Vim versions < 8, and 256 color terminal  
+Plugins used:
+* verilog/systemverilog (syntax) 
+* (visual) indent guides
+* flake8 (python syntax/style/complexity checker)
+Colorscheme: default but gnome term profile colors are provided in gnom_term_gruvbos_light_colors file 
+Clone the repo and link your .vimrc to .vimrc provided 
 
 The vimrc is heavily commented so you can modify it to your needs  
