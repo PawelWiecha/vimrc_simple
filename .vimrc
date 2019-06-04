@@ -12,6 +12,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'nvie/vim-flake8'
 Plug 'nachumk/systemverilog.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+"black requires vim python3 support
+"Plug 'ambv/black'
+"google/yapf uses python parser which breaks on f strings
+"need python newer than 3.6.1
+Plug 'tell-k/vim-autopep8'
 
 call plug#end()
 
@@ -107,4 +112,38 @@ au FileType python set foldmethod=indent foldlevel=99
 
 "Flake8
 let g:flake8_cmd="/home/pwiecha/.local/bin/flake8"
-autocmd BufWritePost *.py call flake8#Flake8()
+let g:flake8_show_quickfix=1
+"autocmd BufWritePost *.py call flake8#Flake8()
+
+"Autopep8 config
+"call :Autopep8 on file
+let g:autopep8_max_line_length=79
+let g:autopep8_ignore="E402,E226,E228,W503,W391"
+
+"Highlight character in lines exceeding 80 chars
+"Usage :call Longlines() or :Lls (aliast below)
+let s:longline_flag = 0
+function! Longlines()
+  if s:longline_flag
+    highlight clear ColorColumn
+    let s:longline_flag = 0
+    echon "Long lines highlight OFF"
+  else
+    highlight ColorColumn ctermbg=magenta
+    call matchadd('ColorColumn', '\%81v', 100)
+    let s:longline_flag = 1
+    echon "Long lines highlight ON"
+  endif
+endfunction
+
+fun! Clrwspace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+"user - specific directory shortcuts
+"Usage :Cdtb, :Lls
+command! Cdtb E /home/pwiecha/dsp_top/tb
+command! Lls call Longlines()
+command! Clrwspace call Clrwspace()
